@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
+import { Desktop } from "../Components/Desktop";
+import Header from "../Components/Header";
 
 function MainPage() {
   const navigate = useNavigate();
@@ -13,8 +15,9 @@ function MainPage() {
 
   return (
     <div>
-      <Box onClick={onClickLogout}>로그아웃</Box>
-      <h1>main 입니둥 크롤링 구현합시다</h1>
+      <Desktop>
+        <Header logout={onClickLogout} logoWidth={"100px"} />
+      </Desktop>
     </div>
   );
 }
