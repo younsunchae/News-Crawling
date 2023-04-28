@@ -12,7 +12,7 @@ const iconv = require("iconv-lite");
 app.get("/api/news", async (req, res) => {
   try {
     const response = await axios.get(
-      "https://news.naver.com/main/list.naver?mode=LS2D&mid=shm&sid1=105&sid2=731",
+      "https://news.naver.com/main/list.naver?mode=LS2D&mid=shm&sid1=105&sid2=230",
       { responseType: "arraybuffer", responseEncoding: "binary" }
     );
     const content = iconv.decode(response.data, "EUC-KR").toString();
