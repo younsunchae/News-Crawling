@@ -7,7 +7,7 @@ import { Box } from "@mui/material";
 
 const Header = (props) => {
   return (
-    <Box sx={{ marginLeft: "5%", marginRight: "5%" }}>
+    <Box>
       <AppBar
         position="static"
         elevation={0}
@@ -21,14 +21,15 @@ const Header = (props) => {
             sx={{
               flexGrow: 1,
               textAlign: "center",
-              padding: "1rem",
+              paddingBottom: "1rem",
+              paddindTop: "1rem",
             }}
           >
             <img src={logo} alt="logo" width={props.logoWidth} />
           </Box>
           <Button
             color="secondary"
-            sx={{ fontWeight: "bold", fontSize: "1em" }}
+            sx={{ fontWeight: "bold", fontSize: "15px" }}
             onClick={props.logout}
           >
             로그아웃
