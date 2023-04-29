@@ -7,7 +7,7 @@ import { Box } from "@mui/material";
 
 const Header = (props) => {
   return (
-    <Box>
+    <Box sx={{ display: "flex" }}>
       <AppBar
         position="static"
         elevation={0}
@@ -17,23 +17,26 @@ const Header = (props) => {
         }}
       >
         <Toolbar>
-          <Box
-            sx={{
-              flexGrow: 1,
-              textAlign: "center",
-              paddingBottom: "1rem",
-              paddindTop: "1rem",
-            }}
-          >
-            <img src={logo} alt="logo" width={props.logoWidth} />
+          <Box sx={{ flex: 2 }}></Box>
+          <Box sx={{ paddingBottom: "1%", paddingTop: "1%" }}>
+            <img
+              src={logo}
+              alt="logo"
+              width={props.logoWidth}
+              style={{ margin: "auto" }}
+            />
           </Box>
-          <Button
-            color="secondary"
-            sx={{ fontWeight: "bold", fontSize: "15px" }}
-            onClick={props.logout}
-          >
-            로그아웃
-          </Button>
+
+          <Box sx={{ flex: 1 }}></Box>
+          <Box sx={{ flex: 1, alignItems: "right" }}>
+            <Button
+              color="secondary"
+              sx={{ fontWeight: "bold", whiteSpace: "nowrap" }}
+              onClick={props.logout}
+            >
+              로그아웃
+            </Button>
+          </Box>
         </Toolbar>
       </AppBar>
     </Box>
