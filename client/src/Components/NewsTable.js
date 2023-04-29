@@ -12,7 +12,7 @@ const NewsTable = ({ articles }) => {
   });
 
   return (
-    <div style={{ height: "50vh" }}>
+    <div style={{ height: "40vh" }}>
       <table
         style={{
           borderCollapse: "separate",
@@ -24,6 +24,7 @@ const NewsTable = ({ articles }) => {
             backgroundColor: "#f0f0f0",
             position: "sticky",
             top: "0",
+            height: "5vh",
           }}
         >
           <tr>
