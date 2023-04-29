@@ -20,15 +20,21 @@ const ExcelDownload = ({ rows }) => {
         flexDirection: "row",
       }}
     >
-      <Box sx={{ justifyContent: "center", alignItems: "center" }}>
-        <Typography fontWeight="bold">전체 기사 수: {rows.length}</Typography>
+      <Box
+        sx={{
+          paddingTop: "7px",
+        }}
+      >
+        <Typography sx={{ fontWeight: "Bold" }}>
+          전체 기사 수: {rows.length}
+        </Typography>
       </Box>
       <Box sx={{ flex: 1 }}></Box>
       <Button
         variant="text"
         color="secondary"
         onClick={download}
-        sx={{ fontWeight: "Bold", fontSize: "large" }}
+        sx={{ fontWeight: "Bold" }}
       >
         엑셀파일 다운로드 &nbsp;
         <DownloadOutlined />
