@@ -26,21 +26,19 @@ const Footer = ({ articles }) => {
         display: "flex",
         flexDirection: "column",
         alignItems: "flex-start",
-        position: "sticky",
-        bottom: 0,
+        position: "relative",
       }}
     >
       <Typography
         sx={{
           fontWeight: "bold",
-          marginLeft: "15px",
         }}
       >
         작성자: 기사수
       </Typography>
-      <Table>
+      <Table sx={{ marginLeft: "-15px" }}>
         <TableBody>
-          <TableRow sx={{}}>
+          <TableRow>
             <TableCell sx={{ border: "none", fontSize: "15px" }} align="left">
               {Object.keys(authorCounts).map((author) => (
                 <span key={author}>
