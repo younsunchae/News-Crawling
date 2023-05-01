@@ -8,8 +8,9 @@
 2. `npm install`로 node_modules을 설치합니다.
 3. `node server.js` 로 express 서버를 시작합니다.
 4. 새 터미널을 열어 `cd client` 명령어로 client 파일로 이동합니다.
-5. `npm start`로 React 서버를 시작합니다.
-6. 웹 브라우저에서 <http://localhost:3000> 로 이동합니다.
+5. `npm install`로 node_modules을 설치합니다.
+6. `npm start`로 React 서버를 시작합니다.
+7. 웹 브라우저에서 <http://localhost:3000> 로 이동합니다.
 
 ## ✒️사용 기술 스택
 
