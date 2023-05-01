@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import ClearIcon from "@mui/icons-material/Clear";
 import IconButton from "@mui/material/IconButton";
-import Box from "@mui/material/Box";
 import "../styles.css";
 
 function SearchHistory(props) {
@@ -54,28 +53,34 @@ function SearchHistory(props) {
               <td style={{ textAlign: "center" }}>검색 내역이 없습니다.</td>
             </tr>
           ) : (
-            props.history.map((search, index) => (
-              <tr key={index} style={{ textAlign: "left", display: "flex" }}>
-                <td
-                  style={{
-                    flex: 1,
-                    display: "flex",
-                    justifyContent: "space-between",
-                    border: "3px solid #ddd",
-                    maxWidth: "100%",
-                    wordBreak: "break-all",
-                  }}
-                >
-                  <a href={search} style={{ color: "black", maxWidth: "100%" }}>
-                    {search}
-                  </a>
+            props.history
+              .slice(0)
+              .reverse()
+              .map((search, index) => (
+                <tr key={index} style={{ textAlign: "left", display: "flex" }}>
+                  <td
+                    style={{
+                      flex: 1,
+                      display: "flex",
+                      justifyContent: "space-between",
+                      border: "3px solid #ddd",
+                      maxWidth: "100%",
+                      wordBreak: "break-all",
+                    }}
+                  >
+                    <a
+                      href={search}
+                      style={{ color: "black", maxWidth: "100%" }}
+                    >
+                      {search}
+                    </a>
 
-                  <IconButton onClick={() => handleDelete(index)}>
-                    <ClearIcon />
-                  </IconButton>
-                </td>
-              </tr>
-            ))
+                    <IconButton onClick={() => handleDelete(index)}>
+                      <ClearIcon />
+                    </IconButton>
+                  </td>
+                </tr>
+              ))
           )}
         </tbody>
       </table>
