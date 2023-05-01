@@ -11,7 +11,7 @@
 5. `npm start`로 React 서버를 시작합니다.
 6. 웹 브라우저에서 <http://localhost:3000> 로 이동합니다.
 
-## ✒️ 라이브러리
+## ✒️사용 기술 스택
 
 ![readme-1](./assets/readme-1.jpg)
 
