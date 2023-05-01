@@ -13,7 +13,7 @@ function SearchHistory(props) {
   };
 
   return (
-    <div style={{ height: "calc(40vh - 64px)" }}>
+    <div style={{ maxHeight: props.height }}>
       <table
         style={{
           borderCollapse: "separate",
@@ -84,6 +84,7 @@ function SearchHistory(props) {
 }
 
 SearchHistory.propTypes = {
+  height: PropTypes.string.isRequired,
   history: PropTypes.array.isRequired,
   setHistory: PropTypes.func.isRequired,
 };

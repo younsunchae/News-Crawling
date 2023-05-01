@@ -136,6 +136,7 @@ function MainPage() {
                     sx={{ flex: 1, paddingRight: "10%" }}
                   >
                     <SearchHistory
+                      height="calc(40vh - 64px)"
                       history={searchHistory}
                       setHistory={setSearchHistory}
                       onDelete={handleDelete}
@@ -219,7 +220,7 @@ function MainPage() {
                       width: "30%",
                     }}
                   ></Box>
-                  <Box sx={{ width: "70%" }}>
+                  <Box sx={{ width: "70%", flexShrink: 0 }}>
                     <ExcelDownload rows={articles} />
                   </Box>
                 </Box>
@@ -236,6 +237,7 @@ function MainPage() {
                     sx={{ flex: 1, paddingRight: "10%" }}
                   >
                     <SearchHistory
+                      height="calc(40vh - 64px)"
                       history={searchHistory}
                       setHistory={setSearchHistory}
                       onDelete={handleDelete}
@@ -289,14 +291,14 @@ function MainPage() {
               <SearchBar onSearch={handleSearch} />
             </Box>
 
-            <Box sx={{}}>
-              <SearchHistory
-                history={searchHistory}
-                setHistory={setSearchHistory}
-                onDelete={handleDelete}
-              />
-            </Box>
-            <Box sx={{}}>
+            <SearchHistory
+              height="50vh"
+              history={searchHistory}
+              setHistory={setSearchHistory}
+              onDelete={handleDelete}
+            />
+
+            <Box>
               <ExcelDownload rows={articles} />
             </Box>
             <Box className="scroll-hide" sx={{ flex: 1 }}>
