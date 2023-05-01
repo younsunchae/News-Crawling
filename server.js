@@ -1,13 +1,54 @@
 const express = require("express");
-const bodyParser = require("body-parser");
+const session = require("express-session");
+
 const app = express();
 const port = process.env.PORT || 5000;
-// app.use(bodyParser.json());
-// app.use(bodyParser.urlencoded({ extended: true }));
-
 const axios = require("axios");
 const cheerio = require("cheerio");
 const iconv = require("iconv-lite");
+const cors = require("cors");
+
+app.use(cors());
+app.listen(port, () => {
+  console.log(`Server is listening on port ${port}`);
+});
+
+app.use(express.json());
+
+app.use(
+  session({
+    secret: "loginUser",
+    cookie: {
+      maxAge: 10 * 60 * 1000,
+    },
+  })
+);
+
+app.post("/api/login", (req, res) => {
+  const { inputId, inputPw } = req.body;
+  const validId = "dozn";
+  const validPw = "doznScrapping2023";
+
+  if (inputId === validId && inputPw === validPw) {
+    req.session.user = { id: inputId };
+    res.status(200).send({ loggedIn: true });
+  } else {
+    res.status(401).send({ loggedIn: false, message: "로그인 실패" });
+  }
+});
+
+app.get("/api/logout", (req, res) => {
+  req.session.destroy();
+  res.status(200).send({ loggedIn: false });
+});
+
+app.get("/api/check-session", (req, res) => {
+  if (req.session.user) {
+    res.status(200).send({ loggedIn: true, user: req.session.user });
+  } else {
+    res.status(200).send({ loggedIn: false });
+  }
+});
 
 app.get("/api/news", async (req, res) => {
   try {
@@ -37,8 +78,4 @@ app.get("/api/news", async (req, res) => {
     console.error(error);
     res.status(500).json({ message: "Internal Server Error" });
   }
-});
-
-app.listen(port, () => {
-  console.log(`Server is listening on port ${port}`);
 });

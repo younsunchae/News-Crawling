@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import { Desktop } from "../Components/Desktop";
 import { Tablet } from "../Components/Tablet";
@@ -9,7 +8,7 @@ import Header from "../Components/Header";
 import NewsTable from "../Components/NewsTable";
 import SearchBar from "../Components/SearchBar";
 import SearchHistory from "../Components/SearchHistory";
-import { getArticles } from "../apis/api";
+import { getArticles, checkSession, logoutUser } from "../apis/api";
 import ExcelDownload from "../Components/ExcelDownload";
 import Footer from "../Components/Footer";
 import "../styles.css";
@@ -27,9 +26,29 @@ function MainPage() {
     fetchData();
   }, []);
 
-  const onClickLogout = () => {
-    sessionStorage.clear();
-    navigate("/");
+  useEffect(() => {
+    const checkSessionInterval = setInterval(async () => {
+      const data = await checkSession();
+
+      if (!data.loggedIn) {
+        console.log("세션 만료");
+        sessionStorage.removeItem("loginUser");
+        navigate("/");
+      }
+    }, 10 * 60 * 1000);
+
+    return () => {
+      clearInterval(checkSessionInterval);
+    };
+  }, [navigate]);
+
+  const onClickLogout = async () => {
+    const data = await logoutUser();
+
+    if (!data.loggedIn) {
+      sessionStorage.clear();
+      navigate("/");
+    }
   };
 
   const handleSearch = (value) => {

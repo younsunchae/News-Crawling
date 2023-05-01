@@ -1,26 +1,25 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import logo from "../assets/logo.png";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import { useNavigate } from "react-router-dom";
+import { loginUser } from "../apis/api";
 
 function Login(props) {
   const navigate = useNavigate();
 
   const [inputId, setInputId] = useState("");
   const [inputPw, setInputPw] = useState("");
-  const [validLogin, setValidLogin] = useState(false);
 
-  const validId = "dozn";
-  const validPw = "doznScrapping2023";
+  const onClickLogin = async () => {
+    const data = await loginUser(inputId, inputPw);
 
-  const onClickLogin = () => {
-    console.log({ inputId }, { inputPw });
-    if (inputId === validId && inputPw === validPw) {
+    if (data.loggedIn) {
       sessionStorage.setItem("loginUser", inputId);
-      sessionStorage.setItem("loginTime", new Date().toString());
       navigate("/main");
+    } else {
+      console.log("Invalid credentials");
     }
   };
 
