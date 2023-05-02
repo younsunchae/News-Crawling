@@ -16,7 +16,6 @@ import "../styles.css";
 function MainPage() {
   const navigate = useNavigate();
   const [articles, setArticles] = useState([]);
-  const [searchHistory, setSearchHistory] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -40,7 +39,7 @@ function MainPage() {
     return () => {
       clearInterval(checkSessionInterval);
     };
-  }, [navigate]);
+  }, []);
 
   const onClickLogout = async () => {
     const data = await logoutUser();
@@ -50,17 +49,26 @@ function MainPage() {
       navigate("/");
     }
   };
+  const [history, setHistory] = useState(
+    JSON.parse(localStorage.getItem("history") || "[]")
+  );
+
+  useEffect(() => {
+    localStorage.setItem("history", JSON.stringify(history));
+  }, [history]);
 
   const handleSearch = (value) => {
     if (value) {
-      setSearchHistory([...searchHistory, value]);
+      const newUrl = {
+        id: Date.now(),
+        url: value,
+      };
+      setHistory([newUrl, ...history]);
     }
   };
 
-  const handleDelete = (index) => {
-    const newHistory = [...searchHistory];
-    newHistory.splice(index, 1);
-    setSearchHistory(newHistory);
+  const handleDelete = (id) => {
+    setHistory(history.filter((url) => url.id !== id));
   };
 
   return (
@@ -137,8 +145,7 @@ function MainPage() {
                   >
                     <SearchHistory
                       height="calc(40vh - 64px)"
-                      history={searchHistory}
-                      setHistory={setSearchHistory}
+                      history={history}
                       onDelete={handleDelete}
                     />
                   </Box>
@@ -238,8 +245,7 @@ function MainPage() {
                   >
                     <SearchHistory
                       height="calc(40vh - 64px)"
-                      history={searchHistory}
-                      setHistory={setSearchHistory}
+                      history={history}
                       onDelete={handleDelete}
                     />
                   </Box>
@@ -293,8 +299,7 @@ function MainPage() {
 
             <SearchHistory
               height="50vh"
-              history={searchHistory}
-              setHistory={setSearchHistory}
+              history={history}
               onDelete={handleDelete}
             />
 

@@ -4,15 +4,9 @@ import ClearIcon from "@mui/icons-material/Clear";
 import IconButton from "@mui/material/IconButton";
 import "../styles.css";
 
-function SearchHistory(props) {
-  const handleDelete = (index) => {
-    const newHistory = [...props.history];
-    newHistory.splice(index, 1);
-    props.setHistory(newHistory);
-  };
-
+function SearchHistory({ height, history, onDelete }) {
   return (
-    <div style={{ maxHeight: props.height }}>
+    <div style={{ maxHeight: { height } }}>
       <table
         style={{
           borderCollapse: "separate",
@@ -48,39 +42,36 @@ function SearchHistory(props) {
           }}
           className="scroll-hide"
         >
-          {props.history.length === 0 ? (
+          {history.length === 0 ? (
             <tr>
               <td style={{ textAlign: "center" }}>검색 내역이 없습니다.</td>
             </tr>
           ) : (
-            props.history
-              .slice(0)
-              .reverse()
-              .map((search, index) => (
-                <tr key={index} style={{ textAlign: "left", display: "flex" }}>
-                  <td
-                    style={{
-                      flex: 1,
-                      display: "flex",
-                      justifyContent: "space-between",
-                      border: "3px solid #ddd",
-                      maxWidth: "100%",
-                      wordBreak: "break-all",
-                    }}
+            history.map((search, id) => (
+              <tr key={id} style={{ textAlign: "left", display: "flex" }}>
+                <td
+                  style={{
+                    flex: 1,
+                    display: "flex",
+                    justifyContent: "space-between",
+                    border: "3px solid #ddd",
+                    maxWidth: "100%",
+                    wordBreak: "break-all",
+                  }}
+                >
+                  <a
+                    href={search.url}
+                    style={{ color: "black", maxWidth: "100%" }}
                   >
-                    <a
-                      href={search}
-                      style={{ color: "black", maxWidth: "100%" }}
-                    >
-                      {search}
-                    </a>
+                    {search.url}
+                  </a>
 
-                    <IconButton onClick={() => handleDelete(index)}>
-                      <ClearIcon />
-                    </IconButton>
-                  </td>
-                </tr>
-              ))
+                  <IconButton onClick={() => onDelete(search.id)}>
+                    <ClearIcon />
+                  </IconButton>
+                </td>
+              </tr>
+            ))
           )}
         </tbody>
       </table>
@@ -91,7 +82,7 @@ function SearchHistory(props) {
 SearchHistory.propTypes = {
   height: PropTypes.string.isRequired,
   history: PropTypes.array.isRequired,
-  setHistory: PropTypes.func.isRequired,
+  onDelete: PropTypes.func.isRequired,
 };
 
 export default SearchHistory;
